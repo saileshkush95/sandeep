@@ -1,0 +1,55 @@
+{% load staticfiles %}
+{% load tawkto_tags %}
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title.title }}</title>
+    <meta name="description"
+        content="Sandeep Prasad Kushwaha. Wel-Come to my portfolio here you can found information related to and my experiance" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static 'css/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/main.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ title.favicon_icon.url }}" type="image/x-icon">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+</head>
+
+<body id="top">
+    <header>
+        {% block body_content %}
+
+        {% endblock body_content %}
+        </footer>
+        <script src="{% static 'js/core/jquery.3.2.1.min.js' %}"></script>
+        <script src="{% static 'js/core/popper.min.js' %}"></script>
+        <script src="{% static 'js/core/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/now-ui-kit.js' %}"></script>
+        <script src="{% static 'js/aos.js' %}"></script>
+        <script src="{% static 'scripts/main.js' %}"></script>
+        {% comment %} <!--Start of Tawk.to Script-->
+        <script type="text/javascript">
+            var Tawk_API = Tawk_API || {},
+                Tawk_LoadStart = new Date();
+            (function () {
+                var s1 = document.createElement("script"),
+                    s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/5c93af52c37db86fcfcf269e/default';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                s0.parentNode.insertBefore(s1, s0);
+            })();
+        </script>
+        <!--End of Tawk.to Script--> {% endcomment %}
+    {% tawkto_script %}
+    {% tawkto_script user_name=request.user.get_full_name user_email=request.user.email %}
+    {% tawkto_script widget_id='somewidgetid' %}
+</body>
+
+</html>

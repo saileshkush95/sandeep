@@ -19,6 +19,8 @@ DEBUG = False
 if DEBUG is False:
     ALLOWED_HOSTS = ['sandeepkush.com.np',
                      'www.sandeepkush.com.np',
+                     'sandeepkushwaha.com.np',
+                     'www.sandeepkushwaha.com.np',
                      '134.209.151.240']
 else:
     ALLOWED_HOSTS = ['*']

@@ -1,41 +1,48 @@
-import os
-from decouple import config
+import environ
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
-STATIC_FILE = os.path.join(BASE_DIR, 'static')
+ROOT_DIR = (
+    environ.Path(__file__) - 2
+)  # (my_awesome_project/config/settings/base.py - 3 = my_awesome_project/)
+
+
+env = environ.Env()
+
+READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)
+if READ_DOT_ENV_FILE:
+    # OS environment variables take precedence over variables from .env
+    env.read_env(str(ROOT_DIR.path(".env")))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-PRIVATE_GOOGLE_RECAPTCHA_KEY = config('PRIVATE_GOOGLE_RECAPTCHA_KEY')
-PUBLIC_GOOGLE_RECAPTCHA_KEY = config('PUBLIC_GOOGLE_RECAPTCHA_KEY')
-SECRET_KEY = config('SECRET_KEY')
+PRIVATE_GOOGLE_RECAPTCHA_KEY = env('PRIVATE_GOOGLE_RECAPTCHA_KEY')
+PUBLIC_GOOGLE_RECAPTCHA_KEY = env('PUBLIC_GOOGLE_RECAPTCHA_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-if DEBUG is False:
+DEBUG = True
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
     ALLOWED_HOSTS = ['sandeepkush.com.np',
                      'www.sandeepkush.com.np',
                      'sandeepkushwaha.com.np',
                      'www.sandeepkushwaha.com.np',
                      '134.209.151.240']
-else:
-    ALLOWED_HOSTS = ['*']
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-SEND_GRID_API_KEY = config('SENDGRID_API_KEY')
+SEND_GRID_API_KEY = env('SENDGRID_API_KEY')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Contact email received from my websites'
 
 
@@ -71,7 +78,7 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],
+        'DIRS': [str(ROOT_DIR.path("templates"))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,14 +98,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': '5432',
-    }
+    'default': env.db()
 }
 
 
@@ -145,15 +145,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    STATIC_FILE,
-]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = 'media/'
+#STATIC_ROOT = str(ROOT_DIR("static"))
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [str(ROOT_DIR.path("static"))]
+MEDIA_ROOT = str(ROOT_DIR("media"))
+MEDIA_URL = "/media/"
 
 
 DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'

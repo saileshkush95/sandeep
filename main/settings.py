@@ -15,7 +15,7 @@ PUBLIC_GOOGLE_RECAPTCHA_KEY = config('PUBLIC_GOOGLE_RECAPTCHA_KEY')
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 if DEBUG is False:
     ALLOWED_HOSTS = ['sandeepkush.com.np',
                      'www.sandeepkush.com.np',

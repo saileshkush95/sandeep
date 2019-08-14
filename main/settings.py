@@ -30,14 +30,12 @@ else:
                      'www.sandeepkush.com.np',
                      'sandeepkushwaha.com.np',
                      'www.sandeepkushwaha.com.np',
-                     '134.209.151.240']
+                     '134.209.151.240',
+                     'localhost']
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-SEND_GRID_API_KEY = env('SENDGRID_API_KEY')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
@@ -57,8 +55,6 @@ INSTALLED_APPS = [
 
     # User applications
     'portfolio_app',
-    # 'dropbox_test',
-    'storages',
     # Tawk to application
     'tawkto',
 ]
@@ -150,11 +146,6 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [str(ROOT_DIR.path("static"))]
 MEDIA_ROOT = str(ROOT_DIR("media"))
 MEDIA_URL = "/media/"
-
-
-DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-DROPBOX_OAUTH2_TOKEN = 'hinbiFY-qsAAAAAAAAAAZMC-6xIvJJ8TmR0Jz3NEjK7I5ngjS06q4lcjJysUTLyr'
-DROPBOX_ROOT_PATH = 'PersonalWebsites'
 
 
 # Tawk to settings

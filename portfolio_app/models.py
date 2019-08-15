@@ -210,7 +210,7 @@ class BackgroundImages(models.Model):
         default=None
     )
     publish = models.DateTimeField(default=timezone.now)
-    updated = models.TimeField(auto_now=True, auto_now_add=False)
+    updated = models.DateTimeField(auto_now=True)
     objects = models.Manager()
 
     def __str__(self):

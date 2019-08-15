@@ -160,6 +160,8 @@ STATICFILES_DIRS = [str(ROOT_DIR.path("static"))]
 MEDIA_ROOT = str(ROOT_DIR("media"))
 MEDIA_URL = "/media/"
 
+OMPRESS_ENABLED = False
+COMPRESS_OFFLINE = True
 
 # Tawk to settings
 TAWKTO_ID_SITE = '5c93af52c37db86fcfcf269e'

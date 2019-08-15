@@ -22,7 +22,7 @@ PUBLIC_GOOGLE_RECAPTCHA_KEY = env('PUBLIC_GOOGLE_RECAPTCHA_KEY')
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
@@ -52,12 +52,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+
 
     # User applications
     'portfolio_app',
     # Tawk to application
     'tawkto',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

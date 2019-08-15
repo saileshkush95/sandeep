@@ -1,9 +1,9 @@
-from django.db import models
-from django.utils import timezone
-
-from django.dispatch import receiver
 import os
 
+from django.db import models
+from django.dispatch import receiver
+from django.shortcuts import reverse
+from django.utils import timezone
 
 # Create your models here.
 
@@ -21,6 +21,15 @@ class Title(models.Model):
 
     def __str__(self):
         return self.title + self.website_title
+
+    def get_absolute_url(self):
+        return reverse("portfolio_app:title", args=[
+            self.publish.year,
+            self.publish.month,
+            self.publish.day,
+            self.id,
+            self.title,
+        ])
 
 
 class SocialIcon(models.Model):
@@ -40,6 +49,15 @@ class SocialIcon(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("portfolio_app:social", args=[
+            self.publish.year,
+            self.publish.month,
+            self.publish.day,
+            self.id,
+            self.name,
+        ])
+
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -51,6 +69,15 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("portfolio_app:category", args=[
+            self.publish.year,
+            self.publish.month,
+            self.publish.day,
+            self.id,
+            self.name,
+        ])
 
 
 class BasicInformation(models.Model):
@@ -78,6 +105,15 @@ class BasicInformation(models.Model):
     def __str__(self):
         return self.email1
 
+    def get_absolute_url(self):
+        return reverse("portfolio_app:information", args=[
+            self.publish.year,
+            self.publish.month,
+            self.publish.day,
+            self.id,
+            self.full_name,
+        ])
+
 
 class Education(models.Model):
     education_name = models.CharField(max_length=255)
@@ -102,6 +138,15 @@ class Education(models.Model):
     def __str__(self):
         return self.education_name
 
+    def get_absolute_url(self):
+        return reverse("portfolio_app:education", args=[
+            self.publish.year,
+            self.publish.month,
+            self.publish.day,
+            self.id,
+            self.education_name,
+        ])
+
 
 class Skill(models.Model):
     name = models.CharField(max_length=255, unique='True')
@@ -117,6 +162,15 @@ class Skill(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("portfolio_app:skill", args=[
+            self.publish.year,
+            self.publish.month,
+            self.publish.day,
+            self.id,
+            self.name,
+        ])
 
 
 class Experiance(models.Model):
@@ -139,6 +193,15 @@ class Experiance(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("portfolio_app:image", args=[
+            self.publish.year,
+            self.publish.month,
+            self.publish.day,
+            self.id,
+            self.name,
+        ])
+
 
 class Refrences(models.Model):
     name = models.CharField(max_length=255)
@@ -146,7 +209,7 @@ class Refrences(models.Model):
     refrence_word = models.TextField()
     refrencer_photo = models.ImageField(
         upload_to='Profile_Photo', default=None, blank=False
-        )
+    )
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -155,6 +218,15 @@ class Refrences(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("portfolio_app:refrence", args=[
+            self.publish.year,
+            self.publish.month,
+            self.publish.day,
+            self.id,
+            self.name,
+        ])
 
 
 class BackgroundImages(models.Model):
@@ -169,11 +241,21 @@ class BackgroundImages(models.Model):
         blank=False,
         default=None
     )
-
+    publish = models.DateTimeField(default=timezone.now)
+    updated = models.TimeField(auto_now=True, auto_now_add=False)
     objects = models.Manager()
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("portfolio_app:background", args=[
+            self.publish.year,
+            self.publish.month,
+            self.publish.day,
+            self.id,
+            self.name,
+        ])
 
 
 class DevelopmentManager(models.Manager):
@@ -222,6 +304,15 @@ class Portfolio_Gallery(models.Model):
     def __str__(self):
         return self.project_name
 
+    def get_absolute_url(self):
+        return reverse("portfolio_app:portfolio", args=[
+            self.publish.year,
+            self.publish.month,
+            self.publish.day,
+            self.id,
+            self.project_name,
+        ])
+
 
 @receiver(models.signals.pre_save, sender=BackgroundImages)
 def auto_delete_file_on_change_header_image(sender, instance, **kwargs):
@@ -229,7 +320,8 @@ def auto_delete_file_on_change_header_image(sender, instance, **kwargs):
         return False
     else:
         try:
-            old_file = sender.objects.get(pk=instance.pk).header_background_image
+            old_file = sender.objects.get(
+                pk=instance.pk).header_background_image
         except sender.DoesNotExist:
             return None
 

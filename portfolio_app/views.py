@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from django.contrib import messages
 # from .forms import ContactForm
+from django.views.generic import DetailView
+
 from .models import (
     Portfolio_Gallery,
     Category,
@@ -21,6 +23,56 @@ from .models import (
 )
 
 # Create your views here.
+
+
+class BackgroundImagesDetailView(DetailView):
+    model = BackgroundImages
+    # template_name = ".html"
+
+
+class Portfolio_GalleryDetailView(DetailView):
+    model = Portfolio_Gallery
+    # template_name = ".html"
+
+
+class CategoryDetailView(DetailView):
+    model = Category
+    # template_name = ".html"
+
+
+class SkillDetailView(DetailView):
+    model = Skill
+    # template_name = ".html"
+
+
+class EducationDetailView(DetailView):
+    model = Education
+    # template_name = ".html"
+
+
+class ExperianceDetailView(DetailView):
+    model = Experiance
+    # template_name = ".html"
+
+
+class RefrencesDetailView(DetailView):
+    model = Refrences
+    # template_name = ".html"
+
+
+class SocialIconDetailView(DetailView):
+    model = SocialIcon
+    # template_name = ".html"
+
+
+class BasicInformationDetailView(DetailView):
+    model = BasicInformation
+    # template_name = ".html"
+
+
+class TitleDetailView(DetailView):
+    model = Title
+    # template_name = ".html"
 
 
 def index(request):

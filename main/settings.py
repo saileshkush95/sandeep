@@ -31,7 +31,9 @@ else:
                      'sandeepkushwaha.com.np',
                      'www.sandeepkushwaha.com.np',
                      '134.209.151.240',
-                     'localhost']
+                     'localhost',
+                     '127.0.0.1'
+                     ]
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -54,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    "compressor",
 
 
     # User applications
@@ -142,11 +145,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-#STATIC_ROOT = str(ROOT_DIR("static"))
+STATIC_ROOT = str(ROOT_DIR("staticfiles"))
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [str(ROOT_DIR.path("static"))]
 MEDIA_ROOT = str(ROOT_DIR("media"))

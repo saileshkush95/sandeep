@@ -154,7 +154,7 @@ STATICFILES_FINDERS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_ROOT = str(ROOT_DIR("staticfiles"))
+STATIC_ROOT = str(ROOT_DIR("static"))
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [str(ROOT_DIR.path("static"))]
 MEDIA_ROOT = str(ROOT_DIR("media"))

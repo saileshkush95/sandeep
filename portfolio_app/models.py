@@ -24,11 +24,7 @@ class Title(models.Model):
 
     def get_absolute_url(self):
         return reverse("portfolio_app:title", args=[
-            self.publish.year,
-            self.publish.month,
-            self.publish.day,
             self.id,
-            self.title,
         ])
 
 
@@ -51,11 +47,7 @@ class SocialIcon(models.Model):
 
     def get_absolute_url(self):
         return reverse("portfolio_app:social", args=[
-            self.publish.year,
-            self.publish.month,
-            self.publish.day,
-            self.id,
-            self.name,
+         self.id,
         ])
 
 
@@ -72,11 +64,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse("portfolio_app:category", args=[
-            self.publish.year,
-            self.publish.month,
-            self.publish.day,
-            self.id,
-            self.name,
+        self.id,
         ])
 
 
@@ -107,11 +95,7 @@ class BasicInformation(models.Model):
 
     def get_absolute_url(self):
         return reverse("portfolio_app:information", args=[
-            self.publish.year,
-            self.publish.month,
-            self.publish.day,
-            self.id,
-            self.full_name,
+        self.id,
         ])
 
 
@@ -140,11 +124,7 @@ class Education(models.Model):
 
     def get_absolute_url(self):
         return reverse("portfolio_app:education", args=[
-            self.publish.year,
-            self.publish.month,
-            self.publish.day,
-            self.id,
-            self.education_name,
+         self.id,
         ])
 
 
@@ -190,12 +170,8 @@ class Experiance(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("portfolio_app:image", args=[
-            self.publish.year,
-            self.publish.month,
-            self.publish.day,
-            self.id,
-            self.name,
+        return reverse("portfolio_app:portfolio", args=[
+        self.id,
         ])
 
 
@@ -217,11 +193,7 @@ class Refrences(models.Model):
 
     def get_absolute_url(self):
         return reverse("portfolio_app:refrence", args=[
-            self.publish.year,
-            self.publish.month,
-            self.publish.day,
-            self.id,
-            self.name,
+        self.id,
         ])
 
 
@@ -246,11 +218,7 @@ class BackgroundImages(models.Model):
 
     def get_absolute_url(self):
         return reverse("portfolio_app:background", args=[
-            self.publish.year,
-            self.publish.month,
-            self.publish.day,
             self.id,
-            self.name,
         ])
 
 
@@ -302,11 +270,7 @@ class Portfolio_Gallery(models.Model):
 
     def get_absolute_url(self):
         return reverse("portfolio_app:portfolio", args=[
-            self.publish.year,
-            self.publish.month,
-            self.publish.day,
             self.id,
-            self.project_name,
         ])
 
 

@@ -26,14 +26,7 @@ DEBUG = False
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = ['sandeepkush.com.np',
-                     'www.sandeepkush.com.np',
-                     'sandeepkushwaha.com.np',
-                     'www.sandeepkushwaha.com.np',
-                     '134.209.151.240',
-                     'localhost',
-                     '127.0.0.1'
-                     ]
+    ALLOWED_HOSTS = ['about.sandeepkushwaha.com.np', 'www.about.sandeepkushwaha.com.np']
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -156,7 +149,7 @@ STATICFILES_FINDERS = (
 
 STATIC_ROOT = str(ROOT_DIR("static"))
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [str(ROOT_DIR.path("static"))]
+#STATICFILES_DIRS = [str(ROOT_DIR.path("static"))]
 MEDIA_ROOT = str(ROOT_DIR("media"))
 MEDIA_URL = "/media/"
 

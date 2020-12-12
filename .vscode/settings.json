@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/sandeep/.local/share/virtualenvs/sandeep-NG17GfWR/bin/python"
+    "python.pythonPath": "/home/russ_2020/.local/share/virtualenvs/sandeep-jHrwvntk/bin/python",
+    "python.linting.enabled": false
 }
